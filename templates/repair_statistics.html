@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+Repair Statistics Report
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4>Repair Statistics Report</h4>
+    <br>
+    {% if result %}
+    <table>
+    <tr>
+        <th>Vendor name</th>
+        <th>Number of repairs completed</th>
+        <th>Total cost spent</th>
+        <th>Average repairs per vehicle</th>
+        <th>average service days</th>
+    </tr>
+    {% for row in result %}
+      <tr>
+          <td> {{ row.vendor_name }}</td>
+          <td> {{ row.number_of_repairs_completed }}</td>
+          <td> {{ row.total_cost_spent }}</td>
+          <td> {{ row.average_repairs_per_vehicle }}</td>
+          <td> {{ row.average_service_days }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+</div> <!-- /container -->
+{% endblock %}

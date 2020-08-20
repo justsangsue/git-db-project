@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Add Vehicle
+{%  endblock %}
+
+{% block content %}
+<head>
+  <!-- Include Date Range Picker -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+  <script type=text/javascript>
+    function openPopups() {
+        $("#myModal").modal();
+    }
+    $(function() {
+      $( "#invent_start_dt" ).datepicker();
+$('#AddVehicleForm').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      data: $('#AddVehicleForm').serialize(),
+      url: "/addvehicle",      
+      success: function(response) {
+          $("#myModal").modal('hide');           
+          $('#vendor_name').append('<option value=' + response + '>' + response + '</option>');
+          $('#vendor_name').val(response) ;
+      },
+      error: function() {
+          alert('Error');
+      }
+    });
+    return false;
+});
+});
+</script>
+</head>
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{message}}
+          </div>
+       {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <div>
+        {{wtf.quick_form(form, button_map={'submit_button': 'primary'})}}
+    </div>
+</div> <!-- /container -->
+{% endblock %}

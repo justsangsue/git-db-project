@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+Vehicle Details
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if result %}
+        {% for row in result %}
+        <p><b>Manufacturer Name</b>: {{ row.manufacturer_name }}</p>
+        <p><b>Model Name</b>: {{ row.model_name }}</p>
+        <p><b>Vehicle Type</b>: {{ row.vehicle_type_name }}</p>
+        <p><b>Model Year</b>: {{ row.model_year }}</p>
+        <p><b>Mileage</b>: {{ row.mileage }}</p>
+        <p><b>Car Condition</b>: {{ row.car_condition }}</p>
+        <p><b>Price</b>: {{ row.cost_price }}</p>
+        <p><b>Description</b>: {{ row.description }}</p>
+        {% if session['manager'] %}
+            <p><b>Inventory Start Date</b>: {{ row.invent_start_dt }}</p>
+            <p>
+                <b>Clerk Username</b>: {{ row.clerk }}
+            </p>
+            <p>
+                <b>Salesperson Username</b>: {{ row.username }}
+            </p>
+            <p>
+                <b>Customer ID</b>: {{ row.customerID }}
+            </p>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% if session['saleperson'] %}
+    <button type="button" class="btn btn-primary">Sell Car</button>
+    {% endif %}
+
+    {% if session['manager'] or session['clerk'] %}
+    <button type="button" class="btn btn-primary">View Repair History</button>
+    {% endif %}
+
+    
+
+</div> <!-- /container -->
+{% endblock %}

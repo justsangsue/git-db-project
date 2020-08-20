@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Seller History Report
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h4>Seller History Report</h4>
+    <br>
+    {% if result %}
+    <table>
+    <tr>
+        <th>Customer name</th>
+        <th>Total number of vehicles sold</th>
+        <th>Average purchase price</th>
+        <th>Average repairs per vehicle</th>
+    </tr>
+    {% for row in result %}
+      {% if row.average_repairs > 5 %}
+      <tr style ="background-color: red">
+          <td> {{ row.customer_name }}</td>
+          <td> {{ row.total_number_vehicles_sold }}</td>
+          <td> {{ row.average_purchase_price }}</td>
+          <td> {{ row.average_repairs }}</td>
+      </tr>
+      {% else %}
+      <tr>
+          <td> {{ row.customer_name }}</td>
+          <td> {{ row.total_number_vehicles_sold }}</td>
+          <td> {{ row.average_purchase_price }}</td>
+          <td> {{ row.average_repairs }}</td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+    </table>
+    {% endif %}
+</div> <!-- /container -->
+{% endblock %}
