@@ -1,4 +1,4 @@
-## Phase 3
+## Phase 3 - Final project of Georgia Tech Database Design Course
 
 ### Technology stack
 HTML, Flask, Python3, MySQL
